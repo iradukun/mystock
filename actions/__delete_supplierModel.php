@@ -1,0 +1,24 @@
+<?php
+require_once '../bootstrap.php';
+
+
+LogInCheck();
+
+if(isset($_GET['supplier_id'])){
+    require_once '../db.php';
+    $sql = "DELETE FROM `supplier` WHERE `supplier_id` = '".$_GET['supplier_id']."'";
+
+
+    if($conn->query($sql)){
+        $_SESSION['success'] = 'supplier deleted successfully';
+    }
+    else
+    {
+        $_SESSION['error'] = 'Something went wrong ';
+    }
+}
+else{
+    $_SESSION['error'] = 'Select supplier to delete first';
+}
+
+header('location: ../suppliers.php');
